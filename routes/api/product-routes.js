@@ -8,11 +8,11 @@ router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
-    const categories = await Product.findAll({
+    const products = await Product.findAll({
       include: [{ model : Category}, { model: Tag}]
     });
 
-    res.status(200).json(categories)
+    res.status(200).json(products)
 
   } catch(error) {
     res.status(500).json(error)
@@ -24,12 +24,12 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    const categoriesByID = await Product.findOne({
+    const productsByID = await Product.findOne({
       where: { id: req.params.id},
       include: [{ model : Category}, { model: Tag}]
     });
 
-    res.status(200).json(categoriesByID)
+    res.status(200).json(productsByID)
 
   } catch(error) {
     res.status(500).json(error)
@@ -113,14 +113,14 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
   try {
-    const updateCategory = await Product.destroy(
+    const updateProduct = await Product.destroy(
     {
       where: { 
         id: req.params.id 
       },
     });
 
-    res.status(200).json(updateCategory)
+    res.status(200).json(updateProduct)
 
   } catch(error) {
     res.status(500).json(error)
